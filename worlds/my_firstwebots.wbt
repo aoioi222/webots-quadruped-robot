@@ -1,0 +1,1508 @@
+#VRML_SIM R2025a utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/floors/protos/CircleArena.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/appearances/protos/Parquetry.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/appearances/protos/CorrodedMetal.proto"
+
+WorldInfo {
+}
+Viewpoint {
+  orientation 0.02374658020285947 0.009998714268751575 -0.9996680077113808 2.3447742186133644
+  position 0.6537779262498823 0.7504482856001811 0.3215513487135142
+}
+TexturedBackground {
+}
+CircleArena {
+  radius 11
+  floorAppearance Parquetry {
+    IBLStrength 0
+  }
+  floorTileSize 1 1
+  wallThickness 0
+  wallHeight 0.0001
+}
+TexturedBackgroundLight {
+  castShadows FALSE
+}
+Robot {
+  translation -0.05001 -0.00108484 0.244857
+  rotation 0.9999992019942475 0.0012632370440862606 -1.5589697323175747e-05 0.013550930365133771
+  children [
+    InertialUnit {
+      translation 0 0 0.02
+      children [
+        Shape {
+          appearance Appearance {
+          }
+          geometry Box {
+            size 0.01 0.01 0.05
+          }
+        }
+      ]
+      name "imu"
+    }
+    Gyro {
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 8.836937503751768e-08
+        axis 0 1 0
+        anchor -0.065 0.15 0.01
+        minStop -3.14
+        maxStop 3.14
+        dampingConstant 0.1
+        staticFriction 0.1
+      }
+      device [
+        RotationalMotor {
+          name "hip_level_motor4"
+          maxVelocity 20
+          minPosition -3.14
+          maxPosition 3.14
+          maxTorque 80
+        }
+      ]
+      endPoint Solid {
+        translation -0.06500008206425377 0.15 0.01000012484815441
+        rotation 1.2542938005940117e-06 0.7071062811856721 0.7071072811859569 3.14159006248654
+        children [
+          DEF LEVEL_HIP_4 Shape {
+            appearance CorrodedMetal {
+            }
+            geometry Cylinder {
+              height 0.07
+              radius 0.012
+            }
+          }
+          DEF HINGER_JOINT2_4 HingeJoint {
+            jointParameters HingeJointParameters {
+              position -0.6100762472327459
+              anchor 0.023 0 0.02
+              minStop -3.14
+              maxStop 3.14
+              dampingConstant 0.1
+              staticFriction 0.1
+            }
+            device [
+              DEF JOINT2_4 RotationalMotor {
+                name "joint2_4"
+                maxVelocity 20
+                minPosition -3.14
+                maxPosition 3.14
+                maxTorque 80
+              }
+            ]
+            endPoint Solid {
+              translation 0.023 0 0.02
+              rotation -0.28763769425776453 -0.9135257426042415 0.28763740097811724 1.6611159803168614
+              children [
+                DEF HINGER_JOINT3_4 HingeJoint {
+                  jointParameters HingeJointParameters {
+                    position -1.2205471959381462
+                    axis 0 0 1
+                    anchor 0 -0.1 0
+                    minStop -3.14
+                    maxStop 3.14
+                    dampingConstant 0.1
+                    staticFriction 0.1
+                  }
+                  device [
+                    RotationalMotor {
+                      name "joint3_4"
+                      maxVelocity 20
+                      minPosition -3.14
+                      maxPosition 3.14
+                      maxTorque 80
+                    }
+                  ]
+                  endPoint Solid {
+                    translation 0 -0.1 0
+                    rotation 0 0 -1 1.220547195938146
+                    children [
+                      Group {
+                        children [
+                          DEF JOINT3_4 Shape {
+                            appearance DEF SMALL_LEG Appearance {
+                              material Material {
+                              }
+                              texture ImageTexture {
+                              }
+                            }
+                            geometry Sphere {
+                              radius 0.019
+                            }
+                          }
+                          DEF jiaomian_4 Pose {
+                            translation 0 -0.105 0
+                            children [
+                              GPS {
+                                name "gps_4"
+                              }
+                              Shape {
+                                appearance Appearance {
+                                  material Material {
+                                  }
+                                  texture ImageTexture {
+                                  }
+                                }
+                                geometry Sphere {
+                                  radius 0.016
+                                  subdivision 3
+                                }
+                              }
+                              HingeJoint {
+                                jointParameters HingeJointParameters {
+                                  axis 0 0 1
+                                  anchor 0 0 -0.03
+                                }
+                                device [
+                                  RotationalMotor {
+                                    name "wheel_motor4"
+                                    maxVelocity 100
+                                  }
+                                ]
+                                endPoint Solid {
+                                  translation 0 0 -0.02
+                                  rotation 1 0 0 0
+                                  children [
+                                    Shape {
+                                      appearance Appearance {
+                                        material Material {
+                                          diffuseColor 0.15 0.15 0.15
+                                        }
+                                      }
+                                      geometry Cylinder {
+                                        height 0.012
+                                        radius 0.02667
+                                      }
+                                    }
+                                  ]
+                                  boundingObject Cylinder {
+                                    height 0.012
+                                    radius 0.02667
+                                  }
+                                  physics Physics {
+                                    density 300
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                          Pose {
+                            translation 0 -0.055 0
+                            children [
+                              DEF SMALL_LEG_4 Shape {
+                                appearance DEF SMALL_LEG` Appearance {
+                                  material Material {
+                                  }
+                                  texture ImageTexture {
+                                  }
+                                }
+                                geometry Box {
+                                  size 0.025 0.1 0.02
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                    boundingObject Group {
+                      children [
+                        DEF JOINT3_4 Shape {
+                          appearance DEF SMALL_LEG Appearance {
+                            material Material {
+                            }
+                            texture ImageTexture {
+                            }
+                          }
+                          geometry Sphere {
+                            radius 0.019
+                          }
+                        }
+                        DEF jiaomian Pose {
+                          translation 0 -0.105 0
+                          children [
+                            Shape {
+                              appearance Appearance {
+                                material Material {
+                                }
+                                texture ImageTexture {
+                                }
+                              }
+                              geometry Sphere {
+                                radius 0.016
+                                subdivision 3
+                              }
+                            }
+                          ]
+                        }
+                        Pose {
+                          translation 0 -0.055 0
+                          children [
+                            DEF SMALL_LEG_4 Shape {
+                              appearance DEF SMALL_LEG` Appearance {
+                                material Material {
+                                }
+                                texture ImageTexture {
+                                }
+                              }
+                              geometry Box {
+                                size 0.025 0.1 0.02
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    physics Physics {
+                    }
+                  }
+                }
+                Group {
+                  children [
+                    DEF SCALL_4 Pose {
+                      translation 0 0 0.01
+                      children [
+                        DEF JOINT2_3_0 Shape {
+                          appearance DEF JOINT2_APPER Appearance {
+                            material Material {
+                              diffuseColor 0.8 0.74902 0.560784
+                            }
+                            texture ImageTexture {
+                            }
+                          }
+                          geometry Box {
+                            size 0.01 0.01 0.045
+                          }
+                        }
+                      ]
+                    }
+                    DEF JOINT2_4 Shape {
+                      appearance DEF JOINT2_APPER Appearance {
+                        material Material {
+                          diffuseColor 0.8 0.74902 0.560784
+                        }
+                        texture ImageTexture {
+                        }
+                      }
+                      geometry DEF JOINT2 Cylinder {
+                        height 0.022
+                        radius 0.0165
+                      }
+                    }
+                    Pose {
+                      translation 0 -0.05 0
+                      children [
+                        DEF BIG_LEG_4 Shape {
+                          appearance DEF JOINT2_APPER Appearance {
+                            material Material {
+                              diffuseColor 0.8 0.74902 0.560784
+                            }
+                            texture ImageTexture {
+                            }
+                          }
+                          geometry Box {
+                            size 0.031 0.1 0.022
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+              boundingObject Group {
+                children [
+                  USE SCALL_4
+                  Pose {
+                    translation 0 -0.05 0
+                    children [
+                      DEF BIG_LEG Shape {
+                        appearance DEF JOINT2_APPER Appearance {
+                          material Material {
+                            diffuseColor 0.8 0.74902 0.560784
+                          }
+                          texture ImageTexture {
+                          }
+                        }
+                        geometry Box {
+                          size 0.031 0.1 0.022
+                        }
+                      }
+                    ]
+                  }
+                  USE JOINT2
+                ]
+              }
+              physics Physics {
+              }
+            }
+          }
+        ]
+        name "level_hip4"
+        boundingObject USE LEVEL_HIP_4
+        physics Physics {
+        }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position -1.1631957731009119e-07
+        axis 0 1 0
+        anchor 0.064975 0.15 0.01
+        minStop -3.14
+        maxStop 3.14
+        dampingConstant 0.1
+        staticFriction 0.1
+      }
+      device [
+        RotationalMotor {
+          name "hip_level_motor3"
+          maxVelocity 20
+          minPosition -3.14
+          maxPosition 3.14
+          maxTorque 80
+        }
+      ]
+      endPoint Solid {
+        translation 0.065 0.15 0.01000000000290799
+        rotation 1.1819252756645166e-06 0.707106281185604 0.70710728118615 3.1415899177496955
+        children [
+          DEF HINGER_JOINT2_3 HingeJoint {
+            jointParameters HingeJointParameters {
+              position -0.6100762524797376
+              anchor -0.023 0 0.02
+              minStop -3.14
+              maxStop 3.14
+            }
+            device [
+              DEF JOINT2_3 RotationalMotor {
+                name "joint2_3"
+                maxVelocity 20
+                minPosition -3.14
+                maxPosition 3.14
+                maxTorque 80
+              }
+            ]
+            endPoint Solid {
+              translation -0.023 0 0.02
+              rotation -0.2876376964561111 -0.9135257412198761 0.28763740317646175 1.6611159818260939
+              children [
+                DEF HINGER_JOINT3_3 HingeJoint {
+                  jointParameters HingeJointParameters {
+                    position -1.2205471939698542
+                    axis 0 0 1
+                    anchor 0 -0.1 0
+                    minStop -3.14
+                    maxStop 3.14
+                    dampingConstant 0.1
+                    staticFriction 0.1
+                  }
+                  device [
+                    DEF JOINT3_3 RotationalMotor {
+                      name "joint3_3"
+                      maxVelocity 20
+                      minPosition -3.14
+                      maxPosition 3.14
+                      maxTorque 80
+                    }
+                  ]
+                  endPoint Solid {
+                    translation 0 -0.1 0
+                    rotation 0 0 -1 1.2205471939698542
+                    children [
+                      Group {
+                        children [
+                          DEF JOINT3_3 Shape {
+                            appearance DEF SMALL_LEG Appearance {
+                              material Material {
+                              }
+                              texture ImageTexture {
+                              }
+                            }
+                            geometry Sphere {
+                              radius 0.019
+                            }
+                          }
+                          DEF jiaomian_3 Pose {
+                            translation 0 -0.105 0
+                            children [
+                              GPS {
+                                name "gps_3"
+                              }
+                              Shape {
+                                appearance Appearance {
+                                  material Material {
+                                  }
+                                  texture ImageTexture {
+                                  }
+                                }
+                                geometry Sphere {
+                                  radius 0.016
+                                  subdivision 3
+                                }
+                              }
+                              HingeJoint {
+                                jointParameters HingeJointParameters {
+                                  axis 0 0 1
+                                  anchor 0 0 0.03
+                                }
+                                device [
+                                  RotationalMotor {
+                                    name "wheel_motor3"
+                                    maxVelocity 100
+                                  }
+                                ]
+                                endPoint Solid {
+                                  translation 0 0 0.02
+                                  rotation 1 0 0 0
+                                  children [
+                                    Shape {
+                                      appearance Appearance {
+                                        material Material {
+                                          diffuseColor 0.15 0.15 0.15
+                                        }
+                                      }
+                                      geometry Cylinder {
+                                        height 0.012
+                                        radius 0.02667
+                                      }
+                                    }
+                                  ]
+                                  boundingObject Cylinder {
+                                    height 0.012
+                                    radius 0.02667
+                                  }
+                                  physics Physics {
+                                    density 300
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                          Pose {
+                            translation 0 -0.055 0
+                            children [
+                              DEF SMALL_LEG_1 Shape {
+                                appearance DEF SMALL_LEG` Appearance {
+                                  material Material {
+                                  }
+                                  texture ImageTexture {
+                                  }
+                                }
+                                geometry Box {
+                                  size 0.025 0.1 0.02
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                    boundingObject Group {
+                      children [
+                        USE JOINT3_3
+                        Pose {
+                          translation 0 -0.105 0
+                          children [
+                            Shape {
+                              appearance Appearance {
+                                material Material {
+                                }
+                                texture ImageTexture {
+                                }
+                              }
+                              geometry Sphere {
+                                radius 0.017
+                                subdivision 3
+                              }
+                            }
+                          ]
+                        }
+                        Pose {
+                          translation 0 -0.055 0
+                          children [
+                            DEF SMALL_LEG Shape {
+                              appearance DEF SMALL_LEG` Appearance {
+                                material Material {
+                                }
+                                texture ImageTexture {
+                                }
+                              }
+                              geometry Box {
+                                size 0.025 0.1 0.02
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    physics Physics {
+                    }
+                  }
+                }
+                Group {
+                  children [
+                    DEF SCALL_1 Pose {
+                      translation 0 0 -0.01
+                      children [
+                        DEF JOINT2_3_0 Shape {
+                          appearance DEF JOINT2_APPER Appearance {
+                            material Material {
+                              diffuseColor 0.8 0.74902 0.560784
+                            }
+                            texture ImageTexture {
+                            }
+                          }
+                          geometry Box {
+                            size 0.01 0.01 0.045
+                          }
+                        }
+                      ]
+                    }
+                    DEF JOINT2_1 Shape {
+                      appearance DEF JOINT2_APPER Appearance {
+                        material Material {
+                          diffuseColor 0.8 0.74902 0.560784
+                        }
+                        texture ImageTexture {
+                        }
+                      }
+                      geometry DEF JOINT2 Cylinder {
+                        height 0.022
+                        radius 0.0165
+                      }
+                    }
+                    Pose {
+                      translation 0 -0.05 0
+                      children [
+                        DEF BIG_LEG_1 Shape {
+                          appearance DEF JOINT2_APPER Appearance {
+                            material Material {
+                              diffuseColor 0.8 0.74902 0.560784
+                            }
+                            texture ImageTexture {
+                            }
+                          }
+                          geometry Box {
+                            size 0.031 0.1 0.022
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+              boundingObject Group {
+                children [
+                  USE SCALL_1
+                  Pose {
+                    translation 0 -0.05 0
+                    children [
+                      DEF BIG_LEG Shape {
+                        appearance DEF JOINT2_APPER Appearance {
+                          material Material {
+                            diffuseColor 0.8 0.74902 0.560784
+                          }
+                          texture ImageTexture {
+                          }
+                        }
+                        geometry Box {
+                          size 0.031 0.1 0.022
+                        }
+                      }
+                    ]
+                  }
+                  USE JOINT2
+                ]
+              }
+              physics Physics {
+              }
+            }
+          }
+          DEF LEVEL_HIP_3 Shape {
+            appearance CorrodedMetal {
+            }
+            geometry Cylinder {
+              height 0.07
+              radius 0.012
+            }
+          }
+        ]
+        name "level_hip3"
+        boundingObject USE LEVEL_HIP_3
+        physics Physics {
+        }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position -1.9458548584585417e-08
+        axis 0 1 0
+        anchor -0.064975 -0.15 0.01
+        minStop -3.14
+        maxStop 3.14
+        dampingConstant 0.1
+        staticFriction 0.1
+      }
+      device [
+        RotationalMotor {
+          name "hip_level_motor2"
+          maxVelocity 20
+          minPosition -3.14
+          maxPosition 3.14
+          maxTorque 80
+        }
+      ]
+      endPoint Solid {
+        translation -0.065 -0.15 0.009999999999513537
+        rotation 1.2161708447031445e-06 0.7071062811856367 0.707107281186059 3.141589986240737
+        children [
+          DEF HINGER_JOINT2_2 HingeJoint {
+            jointParameters HingeJointParameters {
+              position -0.6104707828647034
+              anchor 0.023 0 -0.019999999999999997
+              minStop -3.14
+              maxStop 3.14
+            }
+            device [
+              DEF JOINT2_2 RotationalMotor {
+                name "joint2_2"
+                maxVelocity 20
+                minPosition -3.14
+                maxPosition 3.14
+                maxTorque 80
+              }
+            ]
+            endPoint Solid {
+              translation 0.023 -1.120812164384411e-18 -0.02
+              rotation -0.2878029759761163 -0.9134216238676471 0.2878026825279454 1.6612294962422878
+              children [
+                DEF HINGER_JOINT3_2 HingeJoint {
+                  jointParameters HingeJointParameters {
+                    position -1.2209417279386148
+                    axis 0 0 1
+                    anchor 0 -0.1 0
+                    minStop -3.14
+                    maxStop 3.14
+                    dampingConstant 0.1
+                    staticFriction 0.1
+                  }
+                  device [
+                    DEF JOINT3 RotationalMotor {
+                      name "joint3_2"
+                      maxVelocity 20
+                      minPosition -3.14
+                      maxPosition 3.14
+                      maxTorque 80
+                    }
+                  ]
+                  endPoint Solid {
+                    translation 0 -0.1 0
+                    rotation 0 0 -1 1.2209417279386148
+                    children [
+                      Group {
+                        children [
+                          DEF JOINT3_2 Shape {
+                            appearance DEF SMALL_LEG Appearance {
+                              material Material {
+                              }
+                              texture ImageTexture {
+                              }
+                            }
+                            geometry Sphere {
+                              radius 0.019
+                            }
+                          }
+                          DEF jiaomian_2 Pose {
+                            translation 0 -0.105 0
+                            children [
+                              GPS {
+                                name "gps_2"
+                              }
+                              Shape {
+                                appearance Appearance {
+                                  material Material {
+                                  }
+                                  texture ImageTexture {
+                                  }
+                                }
+                                geometry Sphere {
+                                  radius 0.016
+                                  subdivision 3
+                                }
+                              }
+                              HingeJoint {
+                                jointParameters HingeJointParameters {
+                                  axis 0 0 1
+                                  anchor 0 0 -0.03
+                                }
+                                device [
+                                  RotationalMotor {
+                                    name "wheel_motor2"
+                                    maxVelocity 100
+                                  }
+                                ]
+                                endPoint Solid {
+                                  translation 0 0 -0.03
+                                  rotation 1 0 0 0
+                                  children [
+                                    Shape {
+                                      appearance Appearance {
+                                        material Material {
+                                          diffuseColor 0.15 0.15 0.15
+                                        }
+                                      }
+                                      geometry Cylinder {
+                                        height 0.012
+                                        radius 0.02667
+                                      }
+                                    }
+                                  ]
+                                  boundingObject Cylinder {
+                                    height 0.012
+                                    radius 0.02667
+                                  }
+                                  physics Physics {
+                                    density 300
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                          Pose {
+                            translation 0 -0.055 0
+                            children [
+                              DEF SMALL_LEG_2 Shape {
+                                appearance DEF SMALL_LEG` Appearance {
+                                  material Material {
+                                  }
+                                  texture ImageTexture {
+                                  }
+                                }
+                                geometry Box {
+                                  size 0.025 0.1 0.02
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                    boundingObject Group {
+                      children [
+                        USE JOINT3_2
+                        Pose {
+                          translation 0 -0.105 0
+                          children [
+                            Shape {
+                              appearance Appearance {
+                                material Material {
+                                }
+                                texture ImageTexture {
+                                }
+                              }
+                              geometry Sphere {
+                                radius 0.017
+                                subdivision 3
+                              }
+                            }
+                          ]
+                        }
+                        Pose {
+                          translation 0 -0.055 0
+                          children [
+                            DEF SMALL_LEG Shape {
+                              appearance DEF SMALL_LEG` Appearance {
+                                material Material {
+                                }
+                                texture ImageTexture {
+                                }
+                              }
+                              geometry Box {
+                                size 0.025 0.1 0.02
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    physics Physics {
+                    }
+                  }
+                }
+                Group {
+                  children [
+                    DEF SCALL_2 Pose {
+                      translation 0 0 0.01
+                      children [
+                        DEF JOINT2_3_0 Shape {
+                          appearance DEF JOINT2_APPER Appearance {
+                            material Material {
+                              diffuseColor 0.8 0.74902 0.560784
+                            }
+                            texture ImageTexture {
+                            }
+                          }
+                          geometry Box {
+                            size 0.01 0.01 0.045
+                          }
+                        }
+                      ]
+                    }
+                    DEF JOINT2_2 Shape {
+                      appearance DEF JOINT2_APPER Appearance {
+                        material Material {
+                          diffuseColor 0.8 0.74902 0.560784
+                        }
+                        texture ImageTexture {
+                        }
+                      }
+                      geometry DEF JOINT2 Cylinder {
+                        height 0.022
+                        radius 0.0165
+                      }
+                    }
+                    Pose {
+                      translation 0 -0.05 0
+                      children [
+                        DEF BIG_LEG_2 Shape {
+                          appearance DEF JOINT2_APPER Appearance {
+                            material Material {
+                              diffuseColor 0.8 0.74902 0.560784
+                            }
+                            texture ImageTexture {
+                            }
+                          }
+                          geometry Box {
+                            size 0.031 0.1 0.022
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+              boundingObject Group {
+                children [
+                  USE SCALL_2
+                  Pose {
+                    translation 0 -0.05 0
+                    children [
+                      DEF BIG_LEG Shape {
+                        appearance DEF JOINT2_APPER Appearance {
+                          material Material {
+                            diffuseColor 0.8 0.74902 0.560784
+                          }
+                          texture ImageTexture {
+                          }
+                        }
+                        geometry Box {
+                          size 0.031 0.1 0.022
+                        }
+                      }
+                    ]
+                  }
+                  USE JOINT2
+                ]
+              }
+              physics Physics {
+              }
+            }
+          }
+          DEF LEVEL_HIP_2 Shape {
+            appearance CorrodedMetal {
+            }
+            geometry Cylinder {
+              height 0.07
+              radius 0.012
+            }
+          }
+        ]
+        name "level_hip2"
+        boundingObject USE LEVEL_HIP_2
+        physics Physics {
+        }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        position 6.578001536867895e-08
+        axis 0 1 0
+        anchor 0.06499997258050662 -0.15 0.010000035331072292
+        minStop -3.14
+        maxStop 3.14
+        dampingConstant 0.1
+        staticFriction 0.1
+      }
+      device [
+        RotationalMotor {
+          name "hip_level_motor1"
+          maxVelocity 20
+          minPosition -3.14
+          maxPosition 3.14
+          maxTorque 80
+        }
+      ]
+      endPoint Solid {
+        translation 0.06499997258050662 -0.15 0.010000035331072292
+        rotation -1.2460534882966918e-06 -0.7071072811859814 -0.7071062811856623 3.141585261173518
+        children [
+          DEF HINGER_JOINT2_1 HingeJoint {
+            jointParameters HingeJointParameters {
+              position -0.6104707828652712
+              anchor -0.023 0 -0.02
+              minStop -3.14
+              maxStop 3.14
+            }
+            device [
+              DEF JOINT2_1 RotationalMotor {
+                name "joint2_1"
+                maxVelocity 20
+                minPosition -3.14
+                maxPosition 2
+                maxTorque 80
+              }
+            ]
+            endPoint Solid {
+              translation -0.023 0 -0.02
+              rotation -0.2878012320136176 -0.913422089055822 0.28780295008276385 1.6612309836643557
+              children [
+                DEF HINGER_JOINT3_1 HingeJoint {
+                  jointParameters HingeJointParameters {
+                    position -1.2209417279384327
+                    axis 0 0 1
+                    anchor 0 -0.1 0
+                    minStop -3.14
+                    maxStop 3.14
+                    dampingConstant 0.1
+                    staticFriction 0.1
+                  }
+                  device [
+                    DEF JOINT3_1 RotationalMotor {
+                      name "joint3_1"
+                      maxVelocity 20
+                      minPosition -3.14
+                      maxPosition 3.14
+                      maxTorque 80
+                    }
+                  ]
+                  endPoint Solid {
+                    translation 0 -0.1 0
+                    rotation 0 0 -1 1.2209417279384327
+                    children [
+                      Group {
+                        children [
+                          DEF JOINT3_1 Shape {
+                            appearance DEF SMALL_LEG Appearance {
+                              material Material {
+                              }
+                              texture ImageTexture {
+                              }
+                            }
+                            geometry Sphere {
+                              radius 0.019
+                            }
+                          }
+                          DEF jiaomian_1 Pose {
+                            translation 0 -0.105 0
+                            children [
+                              GPS {
+                                name "gps_1"
+                              }
+                              Shape {
+                                appearance Appearance {
+                                  material Material {
+                                  }
+                                  texture ImageTexture {
+                                  }
+                                }
+                                geometry Sphere {
+                                  radius 0.016
+                                  subdivision 3
+                                }
+                              }
+                              HingeJoint {
+                                jointParameters HingeJointParameters {
+                                  axis 0 0 1
+                                  anchor 0 0 0.03
+                                }
+                                device [
+                                  RotationalMotor {
+                                    name "wheel_motor1"
+                                    maxVelocity 100
+                                  }
+                                ]
+                                endPoint Solid {
+                                  translation 0 0 0.02
+                                  rotation 1 0 0 0
+                                  children [
+                                    Shape {
+                                      appearance Appearance {
+                                        material Material {
+                                          diffuseColor 0.15 0.15 0.15
+                                        }
+                                      }
+                                      geometry Cylinder {
+                                        height 0.012
+                                        radius 0.02667
+                                      }
+                                    }
+                                  ]
+                                  boundingObject Cylinder {
+                                    height 0.012
+                                    radius 0.02667
+                                  }
+                                  physics Physics {
+                                    density 300
+                                  }
+                                }
+                              }
+                            ]
+                          }
+                          Pose {
+                            translation 0 -0.055 0
+                            children [
+                              DEF SMALL_LEG_1 Shape {
+                                appearance DEF SMALL_LEG` Appearance {
+                                  material Material {
+                                  }
+                                  texture ImageTexture {
+                                  }
+                                }
+                                geometry Box {
+                                  size 0.025 0.1 0.02
+                                }
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                    boundingObject Group {
+                      children [
+                        USE JOINT3_1
+                        Pose {
+                          translation 0 -0.105 0
+                          children [
+                            Shape {
+                              appearance Appearance {
+                                material Material {
+                                }
+                                texture ImageTexture {
+                                }
+                              }
+                              geometry Sphere {
+                                radius 0.017
+                                subdivision 3
+                              }
+                            }
+                          ]
+                        }
+                        Pose {
+                          translation 0 -0.055 0
+                          children [
+                            DEF SMALL_LEG Shape {
+                              appearance DEF SMALL_LEG` Appearance {
+                                material Material {
+                                }
+                                texture ImageTexture {
+                                }
+                              }
+                              geometry Box {
+                                size 0.025 0.1 0.02
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                    physics Physics {
+                    }
+                  }
+                }
+                Group {
+                  children [
+                    DEF SCALL_1 Pose {
+                      translation 0 0 -0.01
+                      children [
+                        DEF JOINT2_3_0 Shape {
+                          appearance DEF JOINT2_APPER Appearance {
+                            material Material {
+                              diffuseColor 0.8 0.74902 0.560784
+                            }
+                            texture ImageTexture {
+                            }
+                          }
+                          geometry Box {
+                            size 0.01 0.01 0.045
+                          }
+                        }
+                      ]
+                    }
+                    DEF JOINT2_1 Shape {
+                      appearance DEF JOINT2_APPER Appearance {
+                        material Material {
+                          diffuseColor 0.8 0.74902 0.560784
+                        }
+                        texture ImageTexture {
+                        }
+                      }
+                      geometry DEF JOINT2 Cylinder {
+                        height 0.022
+                        radius 0.0165
+                      }
+                    }
+                    Pose {
+                      translation 0 -0.05 0
+                      children [
+                        DEF BIG_LEG_1 Shape {
+                          appearance DEF JOINT2_APPER Appearance {
+                            material Material {
+                              diffuseColor 0.8 0.74902 0.560784
+                            }
+                            texture ImageTexture {
+                            }
+                          }
+                          geometry Box {
+                            size 0.031 0.1 0.022
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+              boundingObject Group {
+                children [
+                  USE SCALL_1
+                  Pose {
+                    translation 0 -0.05 0
+                    children [
+                      DEF BIG_LEG Shape {
+                        appearance DEF JOINT2_APPER Appearance {
+                          material Material {
+                            diffuseColor 0.8 0.74902 0.560784
+                          }
+                          texture ImageTexture {
+                          }
+                        }
+                        geometry Box {
+                          size 0.031 0.1 0.022
+                        }
+                      }
+                    ]
+                  }
+                  USE JOINT2
+                ]
+              }
+              physics Physics {
+              }
+            }
+          }
+          DEF LEVEL_HIP_1 Shape {
+            appearance CorrodedMetal {
+            }
+            geometry Cylinder {
+              height 0.07
+              radius 0.012
+            }
+          }
+        ]
+        name "level_hip1"
+        boundingObject USE LEVEL_HIP_3
+        physics Physics {
+        }
+      }
+    }
+    Group {
+      children [
+        Solid {
+          translation -2.47851e-08 -0.16 0.015
+          rotation 0.577349935856137 0.5773509358560258 0.577349935856137 2.09439
+          children [
+            Shape {
+              appearance Appearance {
+                material Material {
+                  diffuseColor 1 0.941176 0.65098
+                }
+                texture ImageTexture {
+                }
+              }
+              geometry Cylinder {
+                height 0.07
+                radius 0.035
+              }
+            }
+          ]
+          name "HEAD"
+          boundingObject Cylinder {
+            height 0.07
+            radius 0.035
+          }
+          physics Physics {
+            density 100
+          }
+        }
+        Solid {
+          translation -3.62068e-08 0.14732 -0.00999996
+          rotation -0.5773509358560258 -0.577349935856137 -0.577349935856137 -2.094405307179586
+          children [
+            Shape {
+              appearance Appearance {
+                material Material {
+                  diffuseColor 1 0.941176 0.65098
+                }
+                texture ImageTexture {
+                }
+              }
+              geometry Cylinder {
+                height 0.09
+                radius 0.035
+              }
+            }
+          ]
+          name "tap"
+          boundingObject Cylinder {
+            height 0.09
+            radius 0.035
+          }
+          physics Physics {
+            density 100
+          }
+        }
+        Solid {
+          translation 0 0 -0.01
+          rotation -9.589759999999998e-09 -9.589789999999996e-09 0.9999999999999998 1.5707953071795862
+          children [
+            DEF _11 Shape {
+              appearance Appearance {
+                material Material {
+                  diffuseColor 1 0.941176 0.65098
+                }
+                texture ImageTexture {
+                }
+              }
+              geometry DEF body1_shape Box {
+                size 0.3 0.15 0.07
+              }
+            }
+          ]
+          name "body1"
+          boundingObject USE body1_shape
+          physics Physics {
+          }
+        }
+      ]
+    }
+  ]
+  name "dog_robot"
+  model "null"
+  description "thri_mode_dog"
+  boundingObject Pose {
+    translation 0 0 0.09
+    children [
+      Box {
+        size 0.1 0.1 0.1
+      }
+    ]
+  }
+  physics Physics {
+    centerOfMass [
+      -0.01 -0.34 -0.2
+    ]
+  }
+  controller "my_controller"
+  supervisor TRUE
+  selfCollision TRUE
+}
+Solid {
+  translation -0.419998 -0.000243244 0.100593
+  rotation 0.9999616508078971 0.008757672762987603 9.01784643846668e-06 0.0023849185652183597
+  children [
+    Solid {
+      translation 0 0 -0.092
+      children [
+        DEF zhecheng_base_x Shape {
+          appearance Appearance {
+          }
+          geometry Box {
+            size 0.05 0.3 0.02
+          }
+        }
+      ]
+      name "zhichen_base_x"
+      boundingObject USE zhecheng_base_x
+      physics Physics {
+      }
+    }
+    Solid {
+      translation 0 0 -0.092
+      children [
+        DEF zhecheng_base_y Shape {
+          appearance Appearance {
+          }
+          geometry Box {
+            size 0.3 0.05 0.02
+          }
+        }
+      ]
+      name "zhichen_base_y"
+      boundingObject USE zhecheng_base_y
+      physics Physics {
+      }
+    }
+    Solid {
+      translation 0 0 0.09
+      children [
+        DEF zhecheng_level_y Shape {
+          appearance Appearance {
+          }
+          geometry Box {
+            size 0.04 0.28 0.02
+          }
+        }
+      ]
+      name "zhichen_level_y"
+      boundingObject USE zhecheng_level_y
+      physics Physics {
+      }
+    }
+    Solid {
+      translation 0 0 0.09
+      children [
+        DEF zhecheng_level_x Shape {
+          appearance Appearance {
+          }
+          geometry Box {
+            size 0.3 0.05 0.02
+          }
+        }
+      ]
+      name "zhichen_level_x"
+      boundingObject USE zhecheng_level_x
+      physics Physics {
+      }
+    }
+    DEF zhicheng_middel Shape {
+      appearance Appearance {
+      }
+      geometry Box {
+        size 0.05 0.05 0.2
+      }
+    }
+  ]
+  name "zhichen"
+  boundingObject USE zhicheng_middel
+  physics Physics {
+  }
+}
+Solid {
+  translation -5.481133346146948e-18 0.58 0.1017017858186805
+  rotation 0.5252518867465543 0.846015393780468 0.09147900827875423 2.575664439008463e-17
+  children [
+    Solid {
+      translation 0 0 -0.092
+      children [
+        DEF zhecheng_base_x Shape {
+          appearance Appearance {
+          }
+          geometry Box {
+            size 0.05 0.3 0.02
+          }
+        }
+      ]
+      name "zhichen_base_x"
+      boundingObject USE zhecheng_base_x
+      physics Physics {
+      }
+    }
+    Solid {
+      translation 0 0 -0.092
+      children [
+        DEF zhecheng_base_y Shape {
+          appearance Appearance {
+          }
+          geometry Box {
+            size 0.3 0.05 0.02
+          }
+        }
+      ]
+      name "zhichen_base_y"
+      boundingObject USE zhecheng_base_y
+      physics Physics {
+      }
+    }
+    Solid {
+      translation 0 0 0.09
+      children [
+        DEF zhecheng_level_y Shape {
+          appearance Appearance {
+          }
+          geometry Box {
+            size 0.05 0.12 0.02
+          }
+        }
+      ]
+      name "zhichen_level_y"
+      boundingObject USE zhecheng_level_y
+      physics Physics {
+      }
+    }
+    Solid {
+      translation 0 0 0.09
+      children [
+        DEF zhecheng_level_x Shape {
+          appearance Appearance {
+          }
+          geometry Box {
+            size 0.3 0.05 0.02
+          }
+        }
+      ]
+      name "zhichen_level_x"
+      boundingObject USE zhecheng_level_x
+      physics Physics {
+      }
+    }
+    DEF zhicheng_middel Shape {
+      appearance Appearance {
+      }
+      geometry Box {
+        size 0.05 0.05 0.2
+      }
+    }
+  ]
+  name "zhichen(1)"
+  boundingObject USE zhicheng_middel
+  physics Physics {
+  }
+}
+DEF Foot_Positon_mark_1 Pose {
+  translation 1 0.17 0.01
+  children [
+    Shape {
+      appearance Appearance {
+      }
+      geometry Box {
+        size 0.4 0.002 0.002
+      }
+    }
+    Shape {
+      appearance Appearance {
+      }
+      geometry Box {
+        size 0.002 0.4 0.002
+      }
+    }
+    Shape {
+      appearance Appearance {
+      }
+      geometry Box {
+        size 0.002 0.002 0.4
+      }
+    }
+  ]
+}

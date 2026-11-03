@@ -1,0 +1,17 @@
+# Webots controller build output
+controllers/*/build/
+controllers/*/*.exe
+
+# Local Python environment
+.venv/
+
+# Editor files
+.vscode/
+
+# Native build artifacts
+*.d
+*.o
+
+# Operating system files
+.DS_Store
+Thumbs.db
