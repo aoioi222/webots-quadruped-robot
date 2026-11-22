@@ -1,0 +1,402 @@
+<?xml version="1.0"?>
+<!-- 轮足四足机器狗 v11.1 · 运控简化模型（16 DOF）
+     生成：gen_urdf.py。坐标：x 前、y 左、z 上；base_link 原点在机身中心（髋轴平面 z=0）。
+     KFE 为四连杆 i≡1 的等效直驱关节：URDF 角 = 180° − β（β 为膝内角）。
+     HFE 正角 = 大腿前倾；KFE 正角 = 小腿相对大腿后折。-->
+<robot name="quadruped_v11_1">
+  <link name="base_link">
+    <inertial>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0"/>
+      <mass value="1.380000"/>
+      <inertia ixx="0.004963" ixy="0" ixz="0" iyy="0.017417" iyz="0" izz="0.020757"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0"/>
+      <geometry><box size="0.380000 0.190000 0.084000"/></geometry>
+      <material name="body"/>
+    </visual>
+    <collision>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0"/>
+      <geometry><box size="0.380000 0.190000 0.084000"/></geometry>
+    </collision>
+  </link>
+  <link name="base_footprint"/>
+  <joint name="base_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link"/>
+    <origin xyz="0 0 0.2201" rpy="0 0 0"/>
+  </joint>
+  <joint name="HAA_FL" type="revolute">
+    <parent link="base_link"/>
+    <child link="swing_FL"/>
+    <origin xyz="0.115000 0.074500 0.000000" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-0.261800" upper="0.261800" effort="6.0" velocity="45.029"/>
+  </joint>
+  <link name="swing_FL">
+    <inertial>
+      <origin xyz="0.027500 0.010250 0.000000" rpy="0 0 0"/>
+      <mass value="0.860000"/>
+      <inertia ixx="0.000288" ixy="0" ixz="0" iyy="0.000475" iyz="0" izz="0.000247"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.027500 0.010250 0.000000" rpy="0 0 0"/>
+      <geometry><box size="0.055000 0.040500 0.06"/></geometry>
+      <material name="hip"/>
+    </visual>
+    <collision>
+      <origin xyz="0.027500 0.010250 0.000000" rpy="0 0 0"/>
+      <geometry><box size="0.055000 0.040500 0.06"/></geometry>
+    </collision>
+  </link>
+  <joint name="HFE_FL" type="revolute">
+    <parent link="swing_FL"/>
+    <child link="thigh_FL"/>
+    <origin xyz="0.055000 0.020500 0.000000" rpy="0 0 0"/>
+    <axis xyz="0 -1 0"/>
+    <limit lower="0.274000" upper="1.206000" effort="6.0" velocity="45.029"/>
+  </joint>
+  <link name="thigh_FL">
+    <inertial>
+      <origin xyz="0.000000 0.000000 -0.046200" rpy="0 0 0"/>
+      <mass value="0.040000"/>
+      <inertia ixx="0.000029" ixy="0" ixz="0" iyy="0.000031" iyz="0" izz="0.000002"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.000000 0.000000 -0.046200" rpy="0 0 0"/>
+      <geometry><box size="0.026 0.006 0.092400"/></geometry>
+      <material name="thigh"/>
+    </visual>
+    <collision>
+      <origin xyz="0.000000 0.000000 -0.046200" rpy="0 0 0"/>
+      <geometry><box size="0.026 0.006 0.092400"/></geometry>
+    </collision>
+  </link>
+  <joint name="KFE_FL" type="revolute">
+    <parent link="thigh_FL"/>
+    <child link="shank_FL"/>
+    <origin xyz="0.000000 0.000000 -0.092400" rpy="0 0 0"/>
+    <axis xyz="0 -1 0"/>
+    <limit lower="0.6108652382" upper="2.1816615650" effort="6.0" velocity="45.029"/>
+  </joint>
+  <link name="shank_FL">
+    <inertial>
+      <origin xyz="0.000000 0.000000 -0.051250" rpy="0 0 0"/>
+      <mass value="0.070000"/>
+      <inertia ixx="0.000062" ixy="0" ixz="0" iyy="0.000064" iyz="0" izz="0.000003"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.000000 0.000000 -0.051250" rpy="0 0 0"/>
+      <geometry><box size="0.020 0.008 0.102500"/></geometry>
+      <material name="shank"/>
+    </visual>
+    <collision>
+      <origin xyz="0.000000 0.000000 -0.051250" rpy="0 0 0"/>
+      <geometry><box size="0.020 0.008 0.102500"/></geometry>
+    </collision>
+  </link>
+  <joint name="WHEEL_FL" type="continuous">
+    <parent link="shank_FL"/>
+    <child link="wheel_FL"/>
+    <origin xyz="0.000000 0.000000 -0.102500" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="2.0" velocity="33.510"/>
+  </joint>
+  <link name="wheel_FL">
+    <inertial>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0"/>
+      <mass value="0.410000"/>
+      <inertia ixx="0.000178" ixy="0" ixz="0" iyy="0.000178" iyz="0" izz="0.000328"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.040000" length="0.020"/></geometry>
+      <material name="wheel"/>
+    </visual>
+    <collision>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.040000" length="0.020"/></geometry>
+    </collision>
+  </link>
+  <joint name="HAA_FR" type="revolute">
+    <parent link="base_link"/>
+    <child link="swing_FR"/>
+    <origin xyz="0.115000 -0.074500 0.000000" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-0.261800" upper="0.261800" effort="6.0" velocity="45.029"/>
+  </joint>
+  <link name="swing_FR">
+    <inertial>
+      <origin xyz="0.027500 -0.010250 0.000000" rpy="0 0 0"/>
+      <mass value="0.860000"/>
+      <inertia ixx="0.000288" ixy="0" ixz="0" iyy="0.000475" iyz="0" izz="0.000247"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.027500 -0.010250 0.000000" rpy="0 0 0"/>
+      <geometry><box size="0.055000 0.040500 0.06"/></geometry>
+      <material name="hip"/>
+    </visual>
+    <collision>
+      <origin xyz="0.027500 -0.010250 0.000000" rpy="0 0 0"/>
+      <geometry><box size="0.055000 0.040500 0.06"/></geometry>
+    </collision>
+  </link>
+  <joint name="HFE_FR" type="revolute">
+    <parent link="swing_FR"/>
+    <child link="thigh_FR"/>
+    <origin xyz="0.055000 -0.020500 0.000000" rpy="0 0 0"/>
+    <axis xyz="0 -1 0"/>
+    <limit lower="0.274000" upper="1.206000" effort="6.0" velocity="45.029"/>
+  </joint>
+  <link name="thigh_FR">
+    <inertial>
+      <origin xyz="0.000000 0.000000 -0.046200" rpy="0 0 0"/>
+      <mass value="0.040000"/>
+      <inertia ixx="0.000029" ixy="0" ixz="0" iyy="0.000031" iyz="0" izz="0.000002"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.000000 0.000000 -0.046200" rpy="0 0 0"/>
+      <geometry><box size="0.026 0.006 0.092400"/></geometry>
+      <material name="thigh"/>
+    </visual>
+    <collision>
+      <origin xyz="0.000000 0.000000 -0.046200" rpy="0 0 0"/>
+      <geometry><box size="0.026 0.006 0.092400"/></geometry>
+    </collision>
+  </link>
+  <joint name="KFE_FR" type="revolute">
+    <parent link="thigh_FR"/>
+    <child link="shank_FR"/>
+    <origin xyz="0.000000 0.000000 -0.092400" rpy="0 0 0"/>
+    <axis xyz="0 -1 0"/>
+    <limit lower="0.6108652382" upper="2.1816615650" effort="6.0" velocity="45.029"/>
+  </joint>
+  <link name="shank_FR">
+    <inertial>
+      <origin xyz="0.000000 0.000000 -0.051250" rpy="0 0 0"/>
+      <mass value="0.070000"/>
+      <inertia ixx="0.000062" ixy="0" ixz="0" iyy="0.000064" iyz="0" izz="0.000003"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.000000 0.000000 -0.051250" rpy="0 0 0"/>
+      <geometry><box size="0.020 0.008 0.102500"/></geometry>
+      <material name="shank"/>
+    </visual>
+    <collision>
+      <origin xyz="0.000000 0.000000 -0.051250" rpy="0 0 0"/>
+      <geometry><box size="0.020 0.008 0.102500"/></geometry>
+    </collision>
+  </link>
+  <joint name="WHEEL_FR" type="continuous">
+    <parent link="shank_FR"/>
+    <child link="wheel_FR"/>
+    <origin xyz="0.000000 0.000000 -0.102500" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="2.0" velocity="33.510"/>
+  </joint>
+  <link name="wheel_FR">
+    <inertial>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0"/>
+      <mass value="0.410000"/>
+      <inertia ixx="0.000178" ixy="0" ixz="0" iyy="0.000178" iyz="0" izz="0.000328"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.040000" length="0.020"/></geometry>
+      <material name="wheel"/>
+    </visual>
+    <collision>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.040000" length="0.020"/></geometry>
+    </collision>
+  </link>
+  <joint name="HAA_RL" type="revolute">
+    <parent link="base_link"/>
+    <child link="swing_RL"/>
+    <origin xyz="-0.115000 0.074500 0.000000" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-0.261800" upper="0.261800" effort="6.0" velocity="45.029"/>
+  </joint>
+  <link name="swing_RL">
+    <inertial>
+      <origin xyz="-0.027500 0.010250 0.000000" rpy="0 0 0"/>
+      <mass value="0.860000"/>
+      <inertia ixx="0.000288" ixy="0" ixz="0" iyy="0.000475" iyz="0" izz="0.000247"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.027500 0.010250 0.000000" rpy="0 0 0"/>
+      <geometry><box size="0.055000 0.040500 0.06"/></geometry>
+      <material name="hip"/>
+    </visual>
+    <collision>
+      <origin xyz="-0.027500 0.010250 0.000000" rpy="0 0 0"/>
+      <geometry><box size="0.055000 0.040500 0.06"/></geometry>
+    </collision>
+  </link>
+  <joint name="HFE_RL" type="revolute">
+    <parent link="swing_RL"/>
+    <child link="thigh_RL"/>
+    <origin xyz="-0.055000 0.020500 0.000000" rpy="0 0 0"/>
+    <axis xyz="0 -1 0"/>
+    <limit lower="0.274000" upper="1.206000" effort="6.0" velocity="45.029"/>
+  </joint>
+  <link name="thigh_RL">
+    <inertial>
+      <origin xyz="0.000000 0.000000 -0.046200" rpy="0 0 0"/>
+      <mass value="0.040000"/>
+      <inertia ixx="0.000029" ixy="0" ixz="0" iyy="0.000031" iyz="0" izz="0.000002"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.000000 0.000000 -0.046200" rpy="0 0 0"/>
+      <geometry><box size="0.026 0.006 0.092400"/></geometry>
+      <material name="thigh"/>
+    </visual>
+    <collision>
+      <origin xyz="0.000000 0.000000 -0.046200" rpy="0 0 0"/>
+      <geometry><box size="0.026 0.006 0.092400"/></geometry>
+    </collision>
+  </link>
+  <joint name="KFE_RL" type="revolute">
+    <parent link="thigh_RL"/>
+    <child link="shank_RL"/>
+    <origin xyz="0.000000 0.000000 -0.092400" rpy="0 0 0"/>
+    <axis xyz="0 -1 0"/>
+    <limit lower="0.6108652382" upper="2.1816615650" effort="6.0" velocity="45.029"/>
+  </joint>
+  <link name="shank_RL">
+    <inertial>
+      <origin xyz="0.000000 0.000000 -0.051250" rpy="0 0 0"/>
+      <mass value="0.070000"/>
+      <inertia ixx="0.000062" ixy="0" ixz="0" iyy="0.000064" iyz="0" izz="0.000003"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.000000 0.000000 -0.051250" rpy="0 0 0"/>
+      <geometry><box size="0.020 0.008 0.102500"/></geometry>
+      <material name="shank"/>
+    </visual>
+    <collision>
+      <origin xyz="0.000000 0.000000 -0.051250" rpy="0 0 0"/>
+      <geometry><box size="0.020 0.008 0.102500"/></geometry>
+    </collision>
+  </link>
+  <joint name="WHEEL_RL" type="continuous">
+    <parent link="shank_RL"/>
+    <child link="wheel_RL"/>
+    <origin xyz="0.000000 0.000000 -0.102500" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="2.0" velocity="33.510"/>
+  </joint>
+  <link name="wheel_RL">
+    <inertial>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0"/>
+      <mass value="0.410000"/>
+      <inertia ixx="0.000178" ixy="0" ixz="0" iyy="0.000178" iyz="0" izz="0.000328"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.040000" length="0.020"/></geometry>
+      <material name="wheel"/>
+    </visual>
+    <collision>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.040000" length="0.020"/></geometry>
+    </collision>
+  </link>
+  <joint name="HAA_RR" type="revolute">
+    <parent link="base_link"/>
+    <child link="swing_RR"/>
+    <origin xyz="-0.115000 -0.074500 0.000000" rpy="0 0 0"/>
+    <axis xyz="1 0 0"/>
+    <limit lower="-0.261800" upper="0.261800" effort="6.0" velocity="45.029"/>
+  </joint>
+  <link name="swing_RR">
+    <inertial>
+      <origin xyz="-0.027500 -0.010250 0.000000" rpy="0 0 0"/>
+      <mass value="0.860000"/>
+      <inertia ixx="0.000288" ixy="0" ixz="0" iyy="0.000475" iyz="0" izz="0.000247"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.027500 -0.010250 0.000000" rpy="0 0 0"/>
+      <geometry><box size="0.055000 0.040500 0.06"/></geometry>
+      <material name="hip"/>
+    </visual>
+    <collision>
+      <origin xyz="-0.027500 -0.010250 0.000000" rpy="0 0 0"/>
+      <geometry><box size="0.055000 0.040500 0.06"/></geometry>
+    </collision>
+  </link>
+  <joint name="HFE_RR" type="revolute">
+    <parent link="swing_RR"/>
+    <child link="thigh_RR"/>
+    <origin xyz="-0.055000 -0.020500 0.000000" rpy="0 0 0"/>
+    <axis xyz="0 -1 0"/>
+    <limit lower="0.274000" upper="1.206000" effort="6.0" velocity="45.029"/>
+  </joint>
+  <link name="thigh_RR">
+    <inertial>
+      <origin xyz="0.000000 0.000000 -0.046200" rpy="0 0 0"/>
+      <mass value="0.040000"/>
+      <inertia ixx="0.000029" ixy="0" ixz="0" iyy="0.000031" iyz="0" izz="0.000002"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.000000 0.000000 -0.046200" rpy="0 0 0"/>
+      <geometry><box size="0.026 0.006 0.092400"/></geometry>
+      <material name="thigh"/>
+    </visual>
+    <collision>
+      <origin xyz="0.000000 0.000000 -0.046200" rpy="0 0 0"/>
+      <geometry><box size="0.026 0.006 0.092400"/></geometry>
+    </collision>
+  </link>
+  <joint name="KFE_RR" type="revolute">
+    <parent link="thigh_RR"/>
+    <child link="shank_RR"/>
+    <origin xyz="0.000000 0.000000 -0.092400" rpy="0 0 0"/>
+    <axis xyz="0 -1 0"/>
+    <limit lower="0.6108652382" upper="2.1816615650" effort="6.0" velocity="45.029"/>
+  </joint>
+  <link name="shank_RR">
+    <inertial>
+      <origin xyz="0.000000 0.000000 -0.051250" rpy="0 0 0"/>
+      <mass value="0.070000"/>
+      <inertia ixx="0.000062" ixy="0" ixz="0" iyy="0.000064" iyz="0" izz="0.000003"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.000000 0.000000 -0.051250" rpy="0 0 0"/>
+      <geometry><box size="0.020 0.008 0.102500"/></geometry>
+      <material name="shank"/>
+    </visual>
+    <collision>
+      <origin xyz="0.000000 0.000000 -0.051250" rpy="0 0 0"/>
+      <geometry><box size="0.020 0.008 0.102500"/></geometry>
+    </collision>
+  </link>
+  <joint name="WHEEL_RR" type="continuous">
+    <parent link="shank_RR"/>
+    <child link="wheel_RR"/>
+    <origin xyz="0.000000 0.000000 -0.102500" rpy="0 0 0"/>
+    <axis xyz="0 1 0"/>
+    <limit effort="2.0" velocity="33.510"/>
+  </joint>
+  <link name="wheel_RR">
+    <inertial>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="0 0 0"/>
+      <mass value="0.410000"/>
+      <inertia ixx="0.000178" ixy="0" ixz="0" iyy="0.000178" iyz="0" izz="0.000328"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.040000" length="0.020"/></geometry>
+      <material name="wheel"/>
+    </visual>
+    <collision>
+      <origin xyz="0.000000 0.000000 0.000000" rpy="1.5708 0 0"/>
+      <geometry><cylinder radius="0.040000" length="0.020"/></geometry>
+    </collision>
+  </link>
+  <material name="body"><color rgba="0.85 0.87 0.90 1"/></material>
+  <material name="hip"><color rgba="0.95 0.75 0.45 1"/></material>
+  <material name="thigh"><color rgba="0.20 0.45 0.25 1"/></material>
+  <material name="shank"><color rgba="0.55 0.65 0.75 1"/></material>
+  <material name="wheel"><color rgba="0.15 0.15 0.15 1"/></material>
+</robot>

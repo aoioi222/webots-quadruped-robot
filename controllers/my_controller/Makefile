@@ -1,89 +1,44 @@
-# Copyright 1996-2024 Cyberbotics Ltd.
-#
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
-#
-#     https://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+# Compile the active firmware sources directly. The older flat Webots sources
+# in this directory are kept for reference.
+HAL_ROBOT_DIR ?= ../../../HAL/RCS_Template_F407/RCS/user/robot
+HAL_MODULES = robot_task.c robot_state.c Foot_structure.c bezier_foot_tra.c \
+              body_control.c RCS_PIDctrl.c gravity_comp.c \
+              Calculate/Inverse_kinematics_calculate.c \
+              Calculate/Forward_kinematics_calculate.c \
+              gait_controller/gait_controller.c gait_controller/gait_generator.c \
+              gait_controller/gait_scheduler.c gait_controller/leg_state_machine.c \
+              remote_controller/rc_event_dispatch.c remote_controller/jump_controller.c \
+              remote_controller/remote_control_sbus.c
+HAL_SOURCES := $(addprefix $(HAL_ROBOT_DIR)/,$(HAL_MODULES))
+C_SOURCES = hal_webots/webots_platform.c hal_webots/virtual_sbus.c \
+            hal_webots/webots_ik_checks.c $(HAL_SOURCES)
+INCLUDE = -I"$(HAL_ROBOT_DIR)" -I"$(HAL_ROBOT_DIR)/Calculate" \
+          -I"$(HAL_ROBOT_DIR)/gait_controller" -I"$(HAL_ROBOT_DIR)/remote_controller" \
+          -I"$(HAL_ROBOT_DIR)/IMU" -Ihal_webots
+CFLAGS += -include hal_webots/quadruped_v11_1_config.h
+override BUILD_DIR = build_hal
+NO_FAT_BINARY = 1
 
-### Generic Makefile.include for Webots controllers, physics plugins, robot
-### window libraries, remote control libraries and other libraries
-### to be used with GNU make
-###
-### Platforms: Windows, macOS, Linux
-### Languages: C, C++
-###
-### Authors: Olivier Michel, Yvan Bourquin, Fabien Rohrer
-###          Edmund Ronald, Sergei Poskriakov
-###
-###-----------------------------------------------------------------------------
-###
-### This file is meant to be included from the Makefile files located in the
-### Webots projects subdirectories. It is possible to set a number of variables
-### to customize the build process, i.e., add source files, compilation flags,
-### include paths, libraries, etc. These variables should be set in your local
-### Makefile just before including this Makefile.include. This Makefile.include
-### should never be modified.
-###
-### Here is a description of the variables you may set in your local Makefile:
-###
-### ---- C Sources ----
-### if your program uses several C source files:
-### C_SOURCES = my_plugin.c my_clever_algo.c my_graphics.c
-###
-### ---- C++ Sources ----
-### if your program uses several C++ source files:
-### CXX_SOURCES = my_plugin.cc my_clever_algo.cpp my_graphics.c++
-###
-### ---- Compilation options ----
-### if special compilation flags are necessary:
-### CFLAGS = -Wno-unused-result
-###
-### ---- Linked libraries ----
-### if your program needs additional libraries:
-### INCLUDE = -I"/my_library_path/include"
-### LIBRARIES = -L"/path/to/my/library" -lmy_library -lmy_other_library
-###
-### ---- Linking options ----
-### if special linking flags are needed:
-### LFLAGS = -s
-###
-### ---- Webots included libraries ----
-### if you want to use the Webots C API in your C++ controller program:
-### USE_C_API = true
-###
-### ---- Debug mode ----
-### if you want to display the gcc command line for compilation and link, as
-### well as the rm command details used for cleaning:
-### VERBOSE = 1
-###
-###-----------------------------------------------------------------------------
-
-# ========== 适配你的项目的核心配置 ==========
-# 已完整列出所有的C源文件
-C_SOURCES = Foot_structure.c \
-            my_controller.c \
-            robot_state.c \
-            gait_generator.c \
-            gait_scheduler.c \
-            gait_controller.c \
-            leg_state_machine.c \
-            bezier_foot_tra.c \
-            Inverse_kinematics_calculate.c \
-            Forward_kinematics_calculate.c \
-            Jacobian_matrix.c\
-            body_control.c\
-            jump_controller.c\
-            remote_control.c\
-            comm_protocol.c\
+ifeq ($(wildcard $(HAL_ROBOT_DIR)/robot_task.c),)
+$(error Set HAL_ROBOT_DIR to the HAL firmware's RCS/user/robot directory)
+endif
 
 null :=
 space := $(null) $(null)
-WEBOTS_HOME_PATH?=$(subst $(space),\ ,$(strip $(subst \,/,$(WEBOTS_HOME))))
+WEBOTS_HOME_PATH ?= $(subst $(space),\ ,$(strip $(subst \,/,$(WEBOTS_HOME))))
 include $(WEBOTS_HOME_PATH)/resources/Makefile.include
+
+# Webots uses bare basenames to find sources. Pin these paths so GNU make
+# never picks up an older copy with the same name in the controller directory.
+ifdef GOAL
+define hal_source_rule
+$(BUILD_GOAL_DIR)/$(notdir $(1:.c=.o)): $(1) Makefile
+	@echo "# compiling HAL" $(notdir $(1))
+	$(SILENT)$(CC) -c $(WBCFLAGS) $(CFLAGS) $(INCLUDE) "$(1)" -o $$@
+
+$(BUILD_GOAL_DIR)/$(notdir $(1:.c=.d)): $(1) Makefile
+	$(SILENT)$(CC) $(INCLUDE) $(WBCFLAGS) $(CFLAGS) -MM -MP \
+	    -MT $(BUILD_GOAL_DIR)/$(notdir $(1:.c=.o)) -MT $$@ "$(1)" > $$@
+endef
+$(foreach src,$(HAL_SOURCES),$(eval $(call hal_source_rule,$(src))))
+endif

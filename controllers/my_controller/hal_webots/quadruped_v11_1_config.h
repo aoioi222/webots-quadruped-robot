@@ -1,0 +1,104 @@
+#ifndef QUADRUPED_V11_1_CONFIG_H
+#define QUADRUPED_V11_1_CONFIG_H
+
+#include <robot_config.h>
+
+#define LEG_SAGITTAL_X_SIGN 1.0f
+
+#undef HIP_ABD_LENGTH
+#undef THIGH_LENGTH
+#undef CALF_LENGTH
+#define HIP_ABD_LENGTH 0.0205f
+#define THIGH_LENGTH 0.0924f
+#define CALF_LENGTH 0.1025f
+
+/* The HAA axis runs along X, so its equation is unchanged by the HFE offset in X. */
+#undef HIP_OFFSET_Y_R_F
+#undef HIP_OFFSET_Y_L_F
+#undef HIP_OFFSET_Y_R_B
+#undef HIP_OFFSET_Y_L_B
+#undef HIP_OFFSET_Z_R_F
+#undef HIP_OFFSET_Z_L_F
+#undef HIP_OFFSET_Z_R_B
+#undef HIP_OFFSET_Z_L_B
+#define HIP_OFFSET_Y_R_F (-0.0745f)
+#define HIP_OFFSET_Y_L_F 0.0745f
+#define HIP_OFFSET_Y_R_B (-0.0745f)
+#define HIP_OFFSET_Y_L_B 0.0745f
+#define HIP_OFFSET_Z_R_F 0.0f
+#define HIP_OFFSET_Z_L_F 0.0f
+#define HIP_OFFSET_Z_R_B 0.0f
+#define HIP_OFFSET_Z_L_B 0.0f
+
+#undef FOOT_OFFSET_Y
+#undef FOOT_OFFSET_Z
+#define FOOT_OFFSET_Y 0.095f
+#define FOOT_OFFSET_Z 0.165f
+
+#undef JOINT1_MIN
+#undef JOINT1_MAX
+#undef JOINT2_MIN
+#undef JOINT2_MAX
+#undef JOINT3_MIN
+#undef JOINT3_MAX
+#undef JOINT3_CONTROL_MAX
+#define JOINT1_MIN (-RAD_TO_DEG(0.261800f))
+#define JOINT1_MAX RAD_TO_DEG(0.261800f)
+#define JOINT2_MIN (-RAD_TO_DEG(1.206000f))
+#define JOINT2_MAX (-RAD_TO_DEG(0.274000f))
+#define JOINT3_MIN 35.0f
+#define JOINT3_MAX 125.0f
+#define JOINT3_CONTROL_MAX JOINT3_MAX
+
+#undef STAND_J2
+#undef STAND_J3
+#undef WHEEL_J2
+#undef WHEEL_J3
+#undef FOLD_J2
+#undef FOLD_J3
+#define STAND_J2 23.72967f
+#define STAND_J3 45.0f
+/* A 135 degree included knee angle is a 45 degree bend from straight. */
+#define WHEEL_J2 23.72967f
+#define WHEEL_J3 45.0f
+#define FOLD_J2 65.12897f
+#define FOLD_J3 120.0f
+
+#undef WHEEL_RADIUS
+#undef WHEEL_BASE_HALF
+#define WHEEL_RADIUS 0.04f
+#define WHEEL_BASE_HALF FOOT_OFFSET_Y
+
+/* The 135 degree wheel stance has about 5.8 mm before the knee stop. */
+#undef WHEEL_ATT_MAX_OFFSET_M
+#undef WHEEL_CONTACT_MAX_EXTEND_M
+#undef WHEEL_CONTACT_MAX_RETRACT_M
+#undef WHEEL_CONTACT_MAX_WARP_M
+#define WHEEL_ATT_MAX_OFFSET_M 0.0045f
+#define WHEEL_CONTACT_MAX_EXTEND_M 0.0045f
+#define WHEEL_CONTACT_MAX_RETRACT_M 0.033f
+#define WHEEL_CONTACT_MAX_WARP_M 0.012f
+#define WEBOTS_WHEEL_CONTACT_HOLD_S 0.040
+
+#undef RC_MAX_VEL_X
+#undef RC_MAX_VEL_Y
+#undef RC_MAX_VEL_YAW
+#define RC_MAX_VEL_X 0.12f
+#define RC_MAX_VEL_Y 0.075f
+#define RC_MAX_VEL_YAW 0.30f
+
+#define WEBOTS_EL05_RATED_TORQUE_NM 1.8
+#define WEBOTS_EL05_PEAK_TORQUE_NM 6.0
+#define WEBOTS_EL05_RATED_SPEED_RAD_S 10.472
+#define WEBOTS_EL05_FREE_SPEED_RAD_S 45.029
+#define WEBOTS_EL05_PEAK_DURATION_S 0.50
+
+#define WEBOTS_H6215_RATED_TORQUE_NM 1.0
+#define WEBOTS_H6215_PEAK_TORQUE_NM 2.0
+#define WEBOTS_H6215_RATED_SPEED_RAD_S 12.566
+#define WEBOTS_H6215_FREE_SPEED_RAD_S 33.510
+#define WEBOTS_H6215_PEAK_DURATION_S 0.35
+
+#define WEBOTS_TURN_SUPPORT_TORQUE_FRACTION 0.95
+
+#endif
